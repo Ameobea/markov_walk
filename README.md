@@ -4,7 +4,7 @@ This is a test to see if the movements of prices in financial markets can be app
 Three market states are assumed: up, sideways, and down.  Each 'tick,' or price update, a Markov chain is used to determine if the price should increase, decrease, or stay (mostly) the same.  
 
 ## Installation and Requirements
-Nodejs is used to calculate the markov chains and the results are spit out into a csv.  This CSV is then parsed by an R script into a nice PNG.  The ggplot2 R library is used to plot and save the images.  The shell scripts rely on the Linux `display` command from imagemagik to display the plots.
+Nodejs is used to calculate the markov chains and the results are spit out into a csv.  This CSV is then parsed by an R script into a nice PNG.  The ggplot2 R library is used to plot and save the images.  The shell scripts rely on the Linux `eog` command to display the plots.
 
 ### Usage
 To calculate a new markov chain using the default settings, run `sh run.sh`.  To tweak the input matrix for the chain or change other settings, view the source code in `index.js`, `plot.js`, and `markov.js` for reference.

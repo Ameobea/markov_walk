@@ -16,25 +16,42 @@ var output = require("./output");
 var markov = exports;
 
 //default config
-markov.config = {
+markov.stateMatrix = {
   up: {
-    up: .8,
-    same: .15,
+    up: .7,
+    same: .25,
     down: .05
   }, same: {
-    up: .15,
-    same: .7,
-    down: .15
+    up: 0.1,
+    same: 0.8,
+    down: 0.1
   }, down: {
     up: .05,
-    same: .15,
-    down: .8
+    same: .25,
+    down: .7
   }
 };
 
-markov.chooseState = state=>{
+markov.volatilityMatrix = {
+  up: {
+    up: .7,
+    same: .25,
+    down: .05
+  }, same: {
+    up: 0.1,
+    same: 0.8,
+    down: 0.1
+  }, down: {
+    up: .05,
+    same: .25,
+    down: .7
+  }
+}
+
+//returns the next state given a matrix and current state
+markov.choose = (matrix, state)=>{
   var chance = Math.random();
-  var prob = markov.config[state];
+  var prob = matrix[state];
 
   if(chance >= prob.up + prob.same){
     return "down";
@@ -46,24 +63,30 @@ markov.chooseState = state=>{
     console.log("Error - probabilities do not add up.");
     pricess.exit(1);
   }
-};
+}
 
 //TODO: Add custom config insertion from file that verifies config settings to be sane.
 
 //simulates a 'link' of the chain and returns a new price and state.
-markov.step = (price, state)=>{
-  var state = markov.chooseState(state); //mutate state based on probability matrix
+markov.step = (price, state, volatility)=>{
+  state = markov.choose(markov.stateMatrix, state); //mutate state based on probability matrix
 
-  //TODO: Change multipliers to be determined by makov chains as well.
-  if(state == "up"){
-    price = price * 1.005;
-  }else if(state == "same"){
-    price += (.5 - Math.random());
-  }else if(state == "down"){
-    price = price * .995;
+  if(typeof volatility == "undefined"){
+      volatility = .0001;
   }
 
-  state = markov.chooseState(state);
+  if(state == "up"){
+    price = price * (1+volatility);
+  }else if(state == "same"){
+    var multiplier = 1;
+    if(Math.random() > .5){
+      multiplier = -multiplier;
+    }
+
+    price = price * 1+(volatility*multiplier);
+  }else if(state == "down"){
+    price = price * (1 - volatility);
+  }
 
   return [price, state];
 };
@@ -84,3 +107,6 @@ markov.walk = (state, ticks, fd, i)=>{
   });
 }
 
+markov.volatilityStep = (volatility, state)=>{
+
+}
