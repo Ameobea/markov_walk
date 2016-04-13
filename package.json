@@ -1,0 +1,34 @@
+{
+  "name": "markov_walk",
+  "version": "1.0.0",
+  "description": "An attempt to produce natural-looking price movements using markov chains that model the behavior of financial markets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ameobea/markov_walk.git"
+  },
+  "dependencies": {
+    "minimist": "1.2.0",
+    "bluebird": "3.3.4"
+  },
+  "keywords": [
+    "makrov",
+    "chain",
+    "financial",
+    "market",
+    "stock",
+    "market",
+    "forex",
+    "random",
+    "walk"
+  ],
+  "author": "Casey Primozic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ameobea/markov_walk/issues"
+  },
+  "homepage": "https://github.com/Ameobea/markov_walk#readme"
+}
