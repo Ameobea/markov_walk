@@ -5,7 +5,7 @@ if ((!$#)); then
   ITERS=5
   TICKS=50000
   INCSV=out/out.csv
-  OUTBASE=out
+  OUTBASE=out/out
   STARTPRICE=50
 else
   ITERS=$1
@@ -19,3 +19,5 @@ for (( i=1; i<=$ITERS; i++ ))
 do
   ./run.sh $INCSV ${OUTBASE}${i}.png $TICKS $STARTPRICE yes
 done
+
+eog ${OUTBASE}*.png
