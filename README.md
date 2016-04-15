@@ -11,7 +11,7 @@ To calculate a new markov chain using the default settings, run `sh run.sh`.  To
 
 ### Installation
 1. `npm install`
-2. From the R command line, run `install.packages("ggplot2").
+2. From the R command line, run `install.packages("ggplot2")`.
 
 ## Notes and Observations
 After *VERY* prelimenary testing, it the resulting plots are actually shocking similar to actual foreign exchange charts.  The scale is completely wrong, but the data is right.  
